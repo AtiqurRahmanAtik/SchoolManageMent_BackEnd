@@ -24,6 +24,7 @@ import transactionLogger from "../middleware/transactionLogger.js";
 import MetalTypeRoutes from "../app/modules/MetalType/MetalTypes.routes.js";
 import PurityRoutes from "../app/modules/Purity/Purities.routes.js";
 import DailyPriceRoutes from "../app/modules/DailyPrice/DailyPrices.routes.js";
+import GoldCategoryRoutes from "../app/modules/GoldCategory/GoldCategories.routes.js";
 
 
 
@@ -49,6 +50,7 @@ routes.use("/three-dot-images", threeDotImageRoutes);
 routes.use("/metaltype", MetalTypeRoutes);
 routes.use("/purities", PurityRoutes);
 routes.use("/daily-price", DailyPriceRoutes);
+routes.use("/gold-categories", GoldCategoryRoutes);
 
 
 

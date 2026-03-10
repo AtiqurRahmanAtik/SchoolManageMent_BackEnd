@@ -3,6 +3,7 @@ import Purity from "../Purity/Purities.model.js";
 import MetalType from "../MetalType/MetalTypes.model.js";
 
 export async function getAllDailyPrices(req, res) {
+  
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
