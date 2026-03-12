@@ -21,4 +21,6 @@ MetalTypeRoutes.put("/update/:id",  updateMetalType);
 MetalTypeRoutes.delete("/delete/:id",  removeMetalType);
 
 
+
+
 export default MetalTypeRoutes;

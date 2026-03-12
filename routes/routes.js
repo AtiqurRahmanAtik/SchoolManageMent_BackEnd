@@ -27,6 +27,9 @@ import DailyPriceRoutes from "../app/modules/DailyPrice/DailyPrices.routes.js";
 import GoldCategoryRoutes from "../app/modules/GoldCategory/GoldCategories.routes.js";
 import StockRoutes from "../app/modules/Stock/Stocks.routes.js";
 import GoldProductRoutes from "../app/modules/GoldProduct/GoldProducts.routes.js";
+import CustomerRoutes from "../app/modules/Customer/Customers.routes.js";
+import SaleRoutes from "../app/modules/Sales/Sales.routes.js";
+
 
 
 
@@ -55,6 +58,9 @@ routes.use("/daily-price", DailyPriceRoutes);
 routes.use("/gold-categories", GoldCategoryRoutes);
 routes.use("/stock", StockRoutes); 
 routes.use("/gold-products", GoldProductRoutes);
+
+routes.use("/customer", CustomerRoutes);
+routes.use("/sales", SaleRoutes);
 
 
 
