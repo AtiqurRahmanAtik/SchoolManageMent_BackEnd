@@ -10,11 +10,6 @@ import UserRoleRoutes from "../app/modules/UserRole/UserRoles.routes.js";
 import rolepermissionRoutes from "../app/modules/RolePermission/rolePermission.routes.js";
 
 
-import threeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
-
-
-
-
 
 
 // Used Controllers / Middleware
@@ -32,6 +27,7 @@ import GoldProductRoutes from "../app/modules/GoldProduct/GoldProducts.routes.js
 import CustomerRoutes from "../app/modules/Customer/Customers.routes.js";
 import SaleRoutes from "../app/modules/Sales/Sales.routes.js";
 import WebProductRoutes from "../app/modules/WebProduct/WebProducts.routes.js";
+import ThreeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
 
 
 
@@ -52,7 +48,8 @@ routes.use("/role-permissions", rolepermissionRoutes);
 routes.post("/get-image-url", getImageUrl);
 
 routes.use("/banners", BannerRoutes);
-routes.use("/three-dot-images", threeDotImageRoutes);
+
+routes.use("/three-dot-images", ThreeDotImageRoutes);
 
 
 

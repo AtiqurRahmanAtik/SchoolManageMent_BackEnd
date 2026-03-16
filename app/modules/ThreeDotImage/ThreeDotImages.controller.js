@@ -1,3 +1,5 @@
+// app/modules/ThreeDotImage/ThreeDotImages.controller.js
+
 import ThreeDotImage from "./ThreeDotImages.model.js";
 
 export async function getAllThreeDotImages(req, res) {
@@ -53,7 +55,7 @@ export async function getThreeDotImagesByBranch(req, res) {
   }
 }
 
-// Get 3 dot image by ID
+// Get three dot image by ID
 export async function getThreeDotImageById(req, res) {
   const id = req.params.id;
   try {
@@ -68,7 +70,7 @@ export async function getThreeDotImageById(req, res) {
   }
 }
 
-// Create a new 3 dot image
+// Create a new three dot image
 export async function createThreeDotImage(req, res) {
   try {
     const threeDotImageData = req.body;
@@ -79,7 +81,7 @@ export async function createThreeDotImage(req, res) {
   }
 }
 
-// Update a 3 dot image by ID
+// Update a three dot image by ID
 export async function updateThreeDotImage(req, res) {
   const id = req.params.id;
   const threeDotImageData = req.body;
@@ -97,7 +99,7 @@ export async function updateThreeDotImage(req, res) {
   }
 }
 
-// Remove a 3 dot image by ID
+// Remove a three dot image by ID
 export async function removeThreeDotImage(req, res) {
   const id = req.params.id;
   try {

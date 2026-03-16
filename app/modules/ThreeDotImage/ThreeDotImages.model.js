@@ -1,23 +1,18 @@
-import mongoose from "mongoose";
+// app/modules/ThreeDotImage/ThreeDotImages.model.js
 
+import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const ThreeDotImageSchema = Schema(
   {
-    imageNumber: {
-      type: Number,
-      required: [true, "Please provide the image number"],
-      unique: true,
-    },
     imageName: {
       type: String,
       required: [true, "Please provide the image name"],
     },
     imageUrl: {
       type: String,
-      required: [true, "Please provide the image url"],
+      required: [true, "Please provide the image URL"],
     },
-    
     branch: {
       type: String,
       required: [true, "Please provide the branch"],
