@@ -1,20 +1,21 @@
-import mongoose from "mongoose";
+// File: TrendyCollections.model.js
 
+import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-const WebProductSchema = Schema(
+const TrendyCollectionSchema = Schema(
   {
-    imageName: {
+    productName: {
       type: String,
-      required: [true, "Please provide the image name"],
+      required: [true, "Please provide the product name"],
     },
     imageUrl: {
       type: String,
       required: [true, "Please provide the image URL"],
     },
-    title: {
+    productTitle: {
       type: String,
-      required: [true, "Please provide the title"],
+      required: [true, "Please provide the product title"],
     },
     originalPrice: {
       type: Number,
@@ -32,38 +33,26 @@ const WebProductSchema = Schema(
       type: Number,
       required: [true, "Please provide the quantity"],
     },
-    delivery: {
+    estimatedDelivery: {
       type: String,
-      required: [true, "Please provide the delivery"],
+      required: [true, "Please provide the estimated delivery"],
     },
     category: {
       type: String,
       required: [true, "Please provide the category"],
     },
-    tag: {
-      type: String,
-      required: [true, "Please provide the tag"],
-    },
     weight: {
-      type: String,
-      required: [true, "Please provide the weight in Gram"],
+      type: Number,
+      required: [true, "Please provide the weight"],
     },
     branch: {
       type: String,
       required: [true, "Please provide the branch"],
     },
-    featuredProducts: {
-      type: String,
-      enum: {
-        values: ["New Arrivals", "Featured", "Best Seller"],
-        message: "featuredProducts must be New Arrivals, Featured, or Best Seller",
-      },
-      default: "Best Seller",
-    },
   },
   { timestamps: true }
 );
 
-const WebProduct = model("WebProduct", WebProductSchema);
+const TrendyCollection = model("TrendyCollection", TrendyCollectionSchema);
 
-export default WebProduct;
+export default TrendyCollection;

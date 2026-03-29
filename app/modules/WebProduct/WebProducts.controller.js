@@ -72,13 +72,15 @@ export async function getWebProductById(req, res) {
 
 
 // Create a new web product
+// Create a new web product
 export async function createWebProduct(req, res) {
   try {
     const webProductData = req.body;
     const result = await WebProduct.create(webProductData);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    // Return 400 for Mongoose Validation Errors
+    res.status(400).json({ error: err.message }); 
   }
 }
 
@@ -89,6 +91,7 @@ export async function updateWebProduct(req, res) {
   try {
     const result = await WebProduct.findByIdAndUpdate(id, webProductData, {
       new: true,
+      runValidators: true, // <--- ADD THIS LINE
     });
     if (result) {
       res.status(200).json(result);
@@ -96,7 +99,8 @@ export async function updateWebProduct(req, res) {
       res.status(404).json({ message: "WebProduct not found" });
     }
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    // If validation fails (e.g. wrong enum), it will be caught here
+    res.status(400).json({ error: err.message }); // Changed to 400 Bad Request
   }
 }
 
