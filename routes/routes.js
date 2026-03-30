@@ -29,6 +29,7 @@ import SaleRoutes from "../app/modules/Sales/Sales.routes.js";
 import WebProductRoutes from "../app/modules/WebProduct/WebProducts.routes.js";
 import ThreeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
 import TrendyCollectionRoutes from "../app/modules/TrendyCollection/TrendyCollections.routes.js";
+import AutumnCollectionRoutes from "../app/modules/AutumnCollection/AutumnCollections.routes.js";
 
 
 
@@ -57,6 +58,7 @@ routes.use("/three-dot-images", ThreeDotImageRoutes);
 routes.use("/metaltype", MetalTypeRoutes);
 routes.use("/purities", PurityRoutes);
 routes.use("/trendy-collections", TrendyCollectionRoutes);
+routes.use("/autumn-collections", AutumnCollectionRoutes);
 routes.use("/daily-price", DailyPriceRoutes);
 routes.use("/gold-categories", GoldCategoryRoutes);
 routes.use("/stock", StockRoutes); 
