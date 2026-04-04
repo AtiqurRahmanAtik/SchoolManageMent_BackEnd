@@ -22,14 +22,14 @@ const UserRoutes = Router();
 UserRoutes.post("/login", loginUser); // Login does not require a token
 UserRoutes.post("/post", createUser); // If creating a user should also be public
 
-UserRoutes.get("/", authenticateToken, getAllUsers);
-UserRoutes.get("/:branch/get-all", authenticateToken, getUserByBranch);
-UserRoutes.get("/get-id/:id", authenticateToken, getUserById);
-UserRoutes.post("/logout", authenticateToken, logoutUser);
-UserRoutes.delete("/delete/:id", authenticateToken, removeUser);
-UserRoutes.put("/update/:id", authenticateToken, updateUser);
+UserRoutes.get("/",  getAllUsers);
+UserRoutes.get("/:branch/get-all",  getUserByBranch);
+UserRoutes.get("/get-id/:id",  getUserById);
+UserRoutes.post("/logout",  logoutUser);
+UserRoutes.delete("/delete/:id",  removeUser);
+UserRoutes.put("/update/:id",  updateUser);
 
-UserRoutes.put("/change-password", authenticateToken, changePassword);
+UserRoutes.put("/change-password", changePassword);
 
 
 export default UserRoutes;

@@ -17,18 +17,18 @@ const UserLogRoutes = Router();
 UserLogRoutes.get("/", getAllUserLogs);
 
 // Get user logs by branch (Protected)
-UserLogRoutes.get("/:branch/get-all", authenticateToken, getUserLogsByBranch);
+UserLogRoutes.get("/:branch/get-all",  getUserLogsByBranch);
 
 // Get user log by ID (Protected)
-UserLogRoutes.get("/get-id/:id", authenticateToken, getUserLogById);
+UserLogRoutes.get("/get-id/:id", getUserLogById);
 
 // Delete a user log by ID (Protected)
-UserLogRoutes.delete("/delete/:id", authenticateToken, removeUserLog);
+UserLogRoutes.delete("/delete/:id",  removeUserLog);
 
 // Get paginated user logs (Protected)
-UserLogRoutes.get("/paginated", authenticateToken, getPaginatedUserLogs);
+UserLogRoutes.get("/paginated", getPaginatedUserLogs);
 
-UserLogRoutes.get("/superadmin", authenticateToken, /* adminOnly, */ getSuperAdminLogs);
+UserLogRoutes.get("/superadmin",  /* adminOnly, */ getSuperAdminLogs);
 
 
 export default UserLogRoutes;
