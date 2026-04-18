@@ -15,6 +15,8 @@ import ClassRoutes from "../app/modules/Class/Classes.routes.js";
 import TeacherRoutes from "../app/modules/Teacher/Teachers.routes.js";
 import SectionRoutes from "../app/modules/Section/Sections.routes.js";
 import StudentRoutes from "../app/modules/Student/Students.routes.js";
+import EmployeeRoleRoutes from "../app/modules/EmployeeRole/EmployeeRoles.routes.js";
+import EmployeeRoutes from "../app/modules/Employee/Employees.routes.js";
 
 // Add this line at the top with your other imports
 
@@ -39,6 +41,10 @@ routes.use("/class", ClassRoutes);
 routes.use("/students", StudentRoutes); // Newly registered Student endpoint
 routes.use("/teachers", TeacherRoutes);
 routes.use("/sections", SectionRoutes);
+
+routes.use("/employee-roles", EmployeeRoleRoutes);
+
+routes.use("/employee", EmployeeRoutes);
 
 
 
