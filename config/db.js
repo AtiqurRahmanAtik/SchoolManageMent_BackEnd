@@ -12,7 +12,7 @@ const connectDB = async () => {
 
     // Simply pass the URI, no extra options needed
     const conn = await mongoose.connect(process.env.MONGO_URI,{
-       serverSelectionTimeoutMS: 5000,
+       serverSelectionTimeoutMS: 8000,
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`.underline.green);
