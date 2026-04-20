@@ -17,6 +17,8 @@ import SectionRoutes from "../app/modules/Section/Sections.routes.js";
 import StudentRoutes from "../app/modules/Student/Students.routes.js";
 import EmployeeRoleRoutes from "../app/modules/EmployeeRole/EmployeeRoles.routes.js";
 import EmployeeRoutes from "../app/modules/Employee/Employees.routes.js";
+import StudentAttendanceRoutes from "../app/modules/StudentAttendance/StudentAttendances.routes.js";
+
 
 // Add this line at the top with your other imports
 
@@ -45,6 +47,9 @@ routes.use("/sections", SectionRoutes);
 routes.use("/employee-roles", EmployeeRoleRoutes);
 
 routes.use("/employee", EmployeeRoutes);
+
+
+routes.use("/student-attendance", StudentAttendanceRoutes);
 
 
 
