@@ -1,14 +1,21 @@
 import StudentAttendance from "./StudentAttendances.model.js";
 
+// 1. Get All (with Query Filters for your UI Search)
 export async function getAllStudentAttendances(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
+    // Build filter query dynamically from frontend URL parameters
+    const filterQuery = {};
+    if (req.query.date) filterQuery.date = req.query.date;
+    if (req.query.studentClass) filterQuery.studentClass = req.query.studentClass;
+    if (req.query.section) filterQuery.section = req.query.section;
+
     const [result, totalStudentAttendances] = await Promise.all([
-      StudentAttendance.find().skip(skip).limit(limit).sort({ createdAt: -1 }),
-      StudentAttendance.countDocuments()
+      StudentAttendance.find(filterQuery).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      StudentAttendance.countDocuments(filterQuery)
     ]);
 
     res.status(200).json({
@@ -26,6 +33,7 @@ export async function getAllStudentAttendances(req, res) {
   }
 }
 
+// 2. Get By Branch (also with Query Filters)
 export async function getStudentAttendancesByBranch(req, res) {
   const branch = req.params.branch;
   try {
@@ -33,9 +41,14 @@ export async function getStudentAttendancesByBranch(req, res) {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
+    const filterQuery = { branch };
+    if (req.query.date) filterQuery.date = req.query.date;
+    if (req.query.studentClass) filterQuery.studentClass = req.query.studentClass;
+    if (req.query.section) filterQuery.section = req.query.section;
+
     const [result, totalStudentAttendances] = await Promise.all([
-      StudentAttendance.find({ branch }).skip(skip).limit(limit).sort({ createdAt: -1 }),
-      StudentAttendance.countDocuments({ branch }) 
+      StudentAttendance.find(filterQuery).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      StudentAttendance.countDocuments(filterQuery) 
     ]);
 
     res.status(200).json({
@@ -53,7 +66,7 @@ export async function getStudentAttendancesByBranch(req, res) {
   }
 }
 
-// Get student attendance by ID
+// 3. Get By ID
 export async function getStudentAttendanceById(req, res) {
   const id = req.params.id;
   try {
@@ -68,18 +81,29 @@ export async function getStudentAttendanceById(req, res) {
   }
 }
 
-// Create a new student attendance
+// 4. Create OR Update (Upsert) - Crucial for your UI's "Submit" buttons
 export async function createStudentAttendance(req, res) {
   try {
     const studentAttendanceData = req.body;
-    const result = await StudentAttendance.create(studentAttendanceData);
-    res.status(201).json(result);
+    
+    // UPSERT: If record for this exact student on this exact date exists, update it.
+    // If it does not exist, create a new one. This safely handles multiple clicks.
+    const result = await StudentAttendance.findOneAndUpdate(
+      { 
+        studentId: studentAttendanceData.studentId, 
+        date: studentAttendanceData.date 
+      },
+      studentAttendanceData,
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 }
 
-// Update a student attendance by ID
+// 5. Update Standard
 export async function updateStudentAttendance(req, res) {
   const id = req.params.id;
   const studentAttendanceData = req.body;
@@ -97,7 +121,7 @@ export async function updateStudentAttendance(req, res) {
   }
 }
 
-// Remove a student attendance by ID
+// 6. Delete
 export async function removeStudentAttendance(req, res) {
   const id = req.params.id;
   try {

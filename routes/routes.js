@@ -18,6 +18,7 @@ import StudentRoutes from "../app/modules/Student/Students.routes.js";
 import EmployeeRoleRoutes from "../app/modules/EmployeeRole/EmployeeRoles.routes.js";
 import EmployeeRoutes from "../app/modules/Employee/Employees.routes.js";
 import StudentAttendanceRoutes from "../app/modules/StudentAttendance/StudentAttendances.routes.js";
+import EmployeeAttendanceRoutes from "../app/modules/EmployeeAttendance/EmployeeAttendance.routes.js";
 
 
 // Add this line at the top with your other imports
@@ -50,6 +51,7 @@ routes.use("/employee", EmployeeRoutes);
 
 
 routes.use("/student-attendance", StudentAttendanceRoutes);
+routes.use("/employee-attendance", EmployeeAttendanceRoutes);
 
 
 

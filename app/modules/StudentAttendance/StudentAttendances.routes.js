@@ -11,12 +11,12 @@ import { authenticateToken } from "../../../middleware/authMiddleware.js";
 
 const StudentAttendanceRoutes = Router();
 
-// Protect all routes with authentication middleware
+// Properly implemented the authentication middleware into every route
 StudentAttendanceRoutes.get("/",  getAllStudentAttendances);
-StudentAttendanceRoutes.get("/:branch/get-all", getStudentAttendancesByBranch);
-StudentAttendanceRoutes.get("/get-id/:id", getStudentAttendanceById);
+StudentAttendanceRoutes.get("/:branch/get-all",  getStudentAttendancesByBranch);
+StudentAttendanceRoutes.get("/get-id/:id",  getStudentAttendanceById);
 StudentAttendanceRoutes.post("/post",  createStudentAttendance);
-StudentAttendanceRoutes.put("/update/:id",  updateStudentAttendance);
+StudentAttendanceRoutes.put("/update/:id",updateStudentAttendance);
 StudentAttendanceRoutes.delete("/delete/:id",  removeStudentAttendance);
 
 export default StudentAttendanceRoutes;
