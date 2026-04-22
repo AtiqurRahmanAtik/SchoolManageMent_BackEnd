@@ -1,6 +1,6 @@
 import StudentAttendance from "./StudentAttendances.model.js";
 
-// 1. Get All (with Query Filters for your UI Search)
+// 1. Get All (with Query Filters & Search for your UI Search)
 export async function getAllStudentAttendances(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -9,6 +9,18 @@ export async function getAllStudentAttendances(req, res) {
 
     // Build filter query dynamically from frontend URL parameters
     const filterQuery = {};
+    
+    // FIXED: Added studentName and registrationNo to the generic search feature
+    if (req.query.search) {
+      filterQuery.$or = [
+        { studentClass: { $regex: req.query.search, $options: "i" } },
+        { section: { $regex: req.query.search, $options: "i" } },
+        { studentName: { $regex: req.query.search, $options: "i" } },
+        { registrationNo: { $regex: req.query.search, $options: "i" } }
+      ];
+    }
+
+    // Exact match filters
     if (req.query.date) filterQuery.date = req.query.date;
     if (req.query.studentClass) filterQuery.studentClass = req.query.studentClass;
     if (req.query.section) filterQuery.section = req.query.section;
@@ -33,7 +45,7 @@ export async function getAllStudentAttendances(req, res) {
   }
 }
 
-// 2. Get By Branch (also with Query Filters)
+// 2. Get By Branch (also with Query Filters & Search)
 export async function getStudentAttendancesByBranch(req, res) {
   const branch = req.params.branch;
   try {
@@ -42,6 +54,18 @@ export async function getStudentAttendancesByBranch(req, res) {
     const skip = (page - 1) * limit;
 
     const filterQuery = { branch };
+
+    // FIXED: Added studentName and registrationNo to the generic search feature
+    if (req.query.search) {
+      filterQuery.$or = [
+        { studentClass: { $regex: req.query.search, $options: "i" } },
+        { section: { $regex: req.query.search, $options: "i" } },
+        { studentName: { $regex: req.query.search, $options: "i" } },
+        { registrationNo: { $regex: req.query.search, $options: "i" } }
+      ];
+    }
+
+    // Exact match filters
     if (req.query.date) filterQuery.date = req.query.date;
     if (req.query.studentClass) filterQuery.studentClass = req.query.studentClass;
     if (req.query.section) filterQuery.section = req.query.section;
