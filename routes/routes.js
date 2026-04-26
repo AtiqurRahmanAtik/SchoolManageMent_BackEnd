@@ -20,6 +20,10 @@ import EmployeeRoutes from "../app/modules/Employee/Employees.routes.js";
 import StudentAttendanceRoutes from "../app/modules/StudentAttendance/StudentAttendances.routes.js";
 import EmployeeAttendanceRoutes from "../app/modules/EmployeeAttendance/EmployeeAttendance.routes.js";
 import SubjectRoutes from "../app/modules/Subject/Subjects.routes.js";
+import ClassRoutineRoutes from "../app/modules/ClassRoutine/ClassRoutine.routes.js";
+import ClassTimeRoutes from "../app/modules/ClassTime/ClassTime.routes.js";
+import DayRoutes from "../app/modules/Day/Day.routes.js";
+import ExaminationRoutes from "../app/modules/Examination/Examination.routes.js";
 
 
 // Add this line at the top with your other imports
@@ -29,6 +33,9 @@ import SubjectRoutes from "../app/modules/Subject/Subjects.routes.js";
 
 
 const routes = Router();
+
+
+
 
 // Middleware
 routes.use(transactionLogger);
@@ -57,7 +64,11 @@ routes.use("/student-attendance", StudentAttendanceRoutes);
 routes.use("/employee-attendance", EmployeeAttendanceRoutes);
 
 
+routes.use("/class-routine", ClassRoutineRoutes);
+routes.use("/class-time", ClassTimeRoutes);
+routes.use("/day", DayRoutes);
 
+routes.use("/examination", ExaminationRoutes);
 
 
 
