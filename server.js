@@ -37,7 +37,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
   : [
     "http://localhost:5173",
-    "http://localhost:3000",
+   "https://school-manage-ment-front-end-i33r.vercel.app",
   ];
 
 
