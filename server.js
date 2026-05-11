@@ -57,7 +57,7 @@ app.use(
 
 
 // ================= BODY PARSING =================
-
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
