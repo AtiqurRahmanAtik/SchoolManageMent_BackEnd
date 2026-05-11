@@ -27,6 +27,12 @@ import NoticeRoutes from "../app/modules/Notice/Notice.routes.js";
 import InstituteProfileRoutes from "../app/modules/InstituteProfile/InstituteProfile.routes.js";
 import BannerRoutes from "../app/modules/Banner/Banners.routes.js";
 import OurActivitiesRoutes from "../app/modules/OurActivities/OurActivities.routes.js";
+import ParentsReviewRoutes from "../app/modules/ParentsReview/ParentsReviews.routes.js";
+import EventRoutes from "../app/modules/Event/Events.routes.js";
+import RecentNoticeRoutes from "../app/modules/RecentNotice/RecentNotices.routes.js";
+import BlogRoutes from "../app/modules/Blog/Blogs.routes.js";
+import ContactUsRoutes from "../app/modules/ContactUs/ContactUs.routes.js";
+import AboutUsRoutes from "../app/modules/AboutUs/AboutUs.routes.js";
 
 const routes = Router();
 
@@ -40,7 +46,13 @@ routes.use("/user", userRoutes);
 
 // Main School Website FrontEnd
 routes.use("/banners", BannerRoutes);
+routes.use("/aboutus", AboutUsRoutes);
 routes.use("/our-activities", OurActivitiesRoutes);
+routes.use("/parents-reviews", ParentsReviewRoutes);
+routes.use("/events", EventRoutes);
+routes.use("/recent-notices", RecentNoticeRoutes);
+routes.use("/blogs", BlogRoutes);
+routes.use("/contact-us", ContactUsRoutes);
 
 
 // DashBoard 
