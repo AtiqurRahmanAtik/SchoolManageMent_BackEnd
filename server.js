@@ -38,7 +38,14 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // 1. Allow if no origin (Postman/Server-to-Server)
+      // 2. Allow if exact match in allowedOrigins array
+      // 3. Allow dynamically if it's one of your Vercel preview URLs
+      if (
+        !origin || 
+        allowedOrigins.includes(origin) || 
+        (origin.startsWith("https://school-manage-ment-front-end") && origin.endsWith(".vercel.app"))
+      ) {
         callback(null, true);
       } else {
         // Log the exact origin that is being blocked to help you debug
