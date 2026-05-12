@@ -14,8 +14,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
+app.use(cors());
+app.use(express.json());
+
+
 // ================= DATABASE =================
 connectDB();
+
 
 // ================= SECURITY =================
 app.use(helmet({ hidePoweredBy: true }));
@@ -26,36 +31,30 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+
 // ================= CORS (Single Source) =================
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
   : [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "https://school-manage-ment-front-end-i33r.vercel.app",
-    ];
+    "http://localhost:5173",
+    "http://localhost:3000",
+  ];
+
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // 1. Allow if no origin (Postman/Server-to-Server)
-      // 2. Allow if exact match in allowedOrigins array
-      // 3. Allow dynamically if it's one of your Vercel preview URLs
-      if (
-        !origin || 
-        allowedOrigins.includes(origin) || 
-        (origin.startsWith("https://school-manage-ment-front-end") && origin.endsWith(".vercel.app"))
-      ) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        // Log the exact origin that is being blocked to help you debug
-        console.error(`CORS Blocked for Origin: ${origin}`);
         callback(new Error("CORS Not Allowed"));
       }
     },
     credentials: true,
   })
 );
+
+
 
 // ================= BODY PARSING =================
 app.use(express.json());
@@ -67,24 +66,27 @@ app.use(
   })
 );
 
+
 // ================= STATIC =================
 app.use(express.static("public"));
 
+
 // ================= ROUTES =================
-// Note: Ensure your frontend hits /api/banners/... 
 app.use("/api", routes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Server is running." });
 });
 
+
 // ================= ERROR HANDLER =================
 app.use(errorHandler);
+
 
 // ================= START SERVER =================
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
 });
 
-// ================= VERCEL EXPORT (CRITICAL) =================
+
 export default app;
