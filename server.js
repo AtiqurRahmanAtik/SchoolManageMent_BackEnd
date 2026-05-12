@@ -14,13 +14,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors());
-app.use(express.json());
-
-
 // ================= DATABASE =================
 connectDB();
-
 
 // ================= SECURITY =================
 app.use(helmet({ hidePoweredBy: true }));
@@ -31,30 +26,30 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-
 // ================= CORS (Single Source) =================
+// CRITICAL: Put your actual FRONTEND URL(s) here, NOT the backend URL.
+// Ensure there is NO trailing slash (/) at the end of the URLs.
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
   : [
-    "http://localhost:5173",
-    "http://localhost:3000",
-  ];
-
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://your-react-frontend-url.vercel.app" // <-- UPDATE THIS
+    ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("CORS Not Allowed"));
+        callback(new Error(`CORS Not Allowed for origin: ${origin}`));
       }
     },
     credentials: true,
   })
 );
-
-
 
 // ================= BODY PARSING =================
 app.use(express.json());
@@ -66,10 +61,8 @@ app.use(
   })
 );
 
-
 // ================= STATIC =================
 app.use(express.static("public"));
-
 
 // ================= ROUTES =================
 app.use("/api", routes);
@@ -78,15 +71,12 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Server is running." });
 });
 
-
 // ================= ERROR HANDLER =================
 app.use(errorHandler);
-
 
 // ================= START SERVER =================
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
 });
-
 
 export default app;
